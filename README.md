@@ -1,74 +1,54 @@
-# Avatar IA para Câmera Virtual
+# Virtual Mouse
 
-Este projeto cria uma câmera virtual com um avatar personalizado que pode ser usado em aplicativos como Microsoft Teams, Zoom, Google Meet e outros.
+## Descrição
+Virtual Mouse é um aplicativo de controle gestual que permite manipular o cursor do mouse usando movimentos das mãos capturados pela webcam. Utilizando visão computacional e reconhecimento de gestos, o sistema permite mover o cursor e realizar cliques sem tocar em dispositivos físicos.
 
 ## Funcionalidades
-
-- Detecta os movimentos e expressões faciais usando MediaPipe
-- Mapeia esses movimentos para um avatar simples 2D
-- Cria uma câmera virtual que pode ser selecionada em aplicativos de videoconferência
+- **Mão Direita**: Controla o movimento do cursor
+- **Mão Esquerda**: Realiza cliques do mouse
+  - Pinça entre polegar e indicador: clique esquerdo
+  - Pinça entre polegar e dedo médio: clique direito
+- **Calibração Automática**: Mantenha a mão aberta e parada para calibrar
 
 ## Requisitos
-
-- Python 3.7 ou superior
+- Python 3.6 ou superior
 - Webcam funcional
-- Windows 10/11 (para usar com o OBS Virtual Camera ou outros drivers de câmera virtual)
+- Iluminação adequada para detecção das mãos
 
 ## Instalação
-
-1. Clone este repositório ou baixe os arquivos
-
+1. Clone o repositório ou baixe os arquivos
 2. Instale as dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Para o Windows, você precisa instalar um driver de câmera virtual:
-   - Opção 1: Instale o [OBS Studio](https://obsproject.com/) que inclui o OBS Virtual Camera
-   - Opção 2: Instale o [Unity Capture](https://github.com/schellingb/UnityCapture)
+   ```
+   pip install -r requirements.txt
+   ```
 
 ## Como Usar
+1. Execute o programa:
+   ```
+   python virtual_mouse.py
+   ```
+2. Posicione-se em frente à webcam
+3. Siga as instruções na tela para calibração:
+   - Mantenha a mão aberta e parada para calibrar automaticamente
+4. Controle o mouse:
+   - Use a mão direita para mover o cursor
+   - Use a mão esquerda para fazer cliques
+5. Para sair, pressione ESC ou a tecla 'q'
 
-1. Certifique-se de que sua webcam está conectada e funcionando
+## Parâmetros Configuráveis
+O código contém diversos parâmetros que podem ser ajustados para melhorar a experiência conforme sua necessidade:
+- `ALPHA`: Suavização do movimento (0.2 padrão)
+- `CONFIRM_FRAMES`: Frames necessários para confirmar um clique (2 padrão)
+- `ACTIVE_RANGE`: Sensibilidade do movimento (0.35 padrão)
+- `DEADZONE_REL`: Zona morta para pequenos movimentos (0.05 padrão)
 
-2. Execute o script principal:
+## Dicas de Uso
+- Mantenha-se em um ambiente bem iluminado
+- Evite movimentos bruscos durante a calibração
+- Experimente ajustar os parâmetros se a detecção não estiver ideal para seu ambiente
 
-```bash
-python virtual_avatar.py
-```
-
-3. Você verá duas janelas: uma mostrando sua webcam original e outra mostrando o avatar
-
-4. A câmera virtual será criada e estará disponível para seleção nos aplicativos de videoconferência
-
-5. No Microsoft Teams, Zoom ou outro aplicativo similar:
-   - Acesse as configurações de vídeo
-   - Selecione a câmera virtual (geralmente chamada "OBS Virtual Camera" ou similar)
-
-6. Para sair, pressione 'q' na janela do avatar
-
-## Personalização
-
-Você pode modificar o arquivo `virtual_avatar.py` para personalizar:
-
-- Cores do avatar (variáveis `bg_color`, `face_color`, `eye_color`)
-- Tipo de avatar (atualmente apenas "simple" está disponível)
-- Índice da webcam (se tiver múltiplas câmeras)
-
-## Resolução de problemas
-
-- Se a webcam não for detectada, verifique se está conectada corretamente e não está sendo usada por outro aplicativo
-- Se a câmera virtual não aparecer nos aplicativos, reinicie o computador após instalar o driver de câmera virtual
-- Se o rastreamento facial não funcionar corretamente, tente melhorar a iluminação do ambiente
-
-## Limitações atuais
-
-- Apenas avatar 2D simples está disponível nesta versão
-- É necessário ter uma webcam física para capturar os movimentos faciais
-
-## Próximos passos
-
-- Adicionar mais opções de avatar
-- Implementar animações para o avatar
-- Adicionar fundos personalizados
+## Tecnologias Utilizadas
+- OpenCV: Processamento de imagem e vídeo
+- MediaPipe: Reconhecimento e rastreamento de mãos
+- NumPy: Processamento numérico
+- Pynput: Controle programático do mouse
